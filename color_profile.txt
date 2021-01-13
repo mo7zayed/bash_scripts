@@ -1,0 +1,2 @@
+# check
+https://askubuntu.com/questions/409940/gnome-color-manager-to-from-srgb-tabs

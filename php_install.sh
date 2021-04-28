@@ -15,7 +15,7 @@ sudo apt install -y php7.3 php7.3-common php7.3-curl php7.3-json php7.3-mbstring
 sudo apt install -y php7.4 php7.4-common php7.4-curl php7.4-json php7.4-mbstring php7.4-mysql php7.4-xml php7.4-zip php7.4-dev php7.4-gd php7.4-redis php7.4-intl php7.4-sqlite3 php7.4-bcmath php7.4-memcached php7.4-pgsql
 
 # for php8.0
-# sudo apt install -y php8.0 php8.0-common php8.0-curl php8.0-json php8.0-mbstring php8.0-mysql php8.0-xml php8.0-zip php8.0-dev php8.0-gd php8.0-redis php8.0-intl
+sudo apt install -y php8.0 php8.0-common php8.0-curl php8.0-json php8.0-mbstring php8.0-mysql php8.0-xml php8.0-zip php8.0-dev php8.0-gd php8.0-redis php8.0-intl php8.0-sqlite3 php8.0-bcmath php8.0-memcached php8.0-pgsql
 
 # To set the default /usr/bin/php bin
 # sudo update-alternatives --config php

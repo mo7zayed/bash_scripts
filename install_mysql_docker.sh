@@ -18,3 +18,19 @@ docker run --name phpmyadmin -d --link mysql5.7:db -p 9000:80 phpmyadmin:latest
 ## if it did not work on the localhost mysql edit /etc/mysql/mysql.conf.d/mysqld.cnf
 ## and change bind-address to 0.0.0.0 `bind-address = 0.0.0.0` instead of `bind-address = 127.0.0.1`
 docker run --name phpmyadmin_local -d --add-host host.docker.internal:host-gateway -e PMA_HOST=host.docker.internal -e PMA_PORT=3306 -p 9001:80 phpmyadmin
+
+
+# import a database to mysql with docker client
+## create the container
+docker run -e MYSQL_ROOT_PASSWORD=root -d --name mysql mysql;
+## copy the db file
+docker cp ./db.sql mysql:/
+## open container shell
+docker exec -it mysql bash
+## run mysql client
+mysql -hcrm.cluster-crml0m77ocb0.eu-south-1.rds.amazonaws.com -uadmin -p
+## create the database
+mysql> create database my_db;
+mysql> use my_db;
+mysql> source db.sql;
+

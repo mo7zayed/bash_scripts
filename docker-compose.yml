@@ -1,0 +1,81 @@
+version: '3'
+services:
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'root'
+            MYSQL_ROOT_HOST: '%'
+        volumes:
+            - 'infra-mysql:/var/lib/mysql'
+        networks:
+            - infra
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-proot'
+            retries: 3
+            timeout: 5s
+    phpmyadmin:
+        image: 'phpmyadmin:latest'
+        ports:
+            - '9000:80'
+        networks:
+            - infra
+        links:
+            - 'mysql:db'
+        environment:
+            UPLOAD_LIMIT: 2G
+        depends_on:
+            - mysql
+    pgsql:
+        image: 'postgres:15'
+        ports:
+            - '5432:5432'
+        environment:
+            PGPASSWORD: 'postgres'
+            POSTGRES_DB: 'main'
+            POSTGRES_USER: 'admin'
+            POSTGRES_PASSWORD: 'admin'
+        volumes:
+            - 'infra-pgsql:/var/lib/postgresql/data'
+        networks:
+            - infra
+        healthcheck:
+            test: ["CMD", "pg_isready", "-q", "-d", "main", "-U", "admin"]
+            retries: 3
+            timeout: 5s
+    pgadmin:
+        image: 'dpage/pgadmin4:latest'
+        ports:
+            - '9001:80'
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 'admin@admin.com'
+            PGADMIN_DEFAULT_PASSWORD: 'admin'
+        networks:
+            - infra
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '6379:6379'
+        volumes:
+            - 'infra-redis:/data'
+        networks:
+            - infra
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+networks:
+    infra:
+        driver: bridge
+volumes:
+    infra-mysql:
+        driver: local
+    infra-pgsql:
+        driver: local
+    infra-redis:
+        driver: local

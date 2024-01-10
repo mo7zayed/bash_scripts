@@ -19,6 +19,9 @@ docker run --name phpmyadmin -d --link mysql5.7:db -p 9000:80 phpmyadmin:latest
 ## and change bind-address to 0.0.0.0 `bind-address = 0.0.0.0` instead of `bind-address = 127.0.0.1`
 docker run --name phpmyadmin_local -d --add-host host.docker.internal:host-gateway -e PMA_HOST=host.docker.internal -e PMA_PORT=3306 -p 9001:80 phpmyadmin
 
+# php my admin in a bastion server
+docker run --name phpmyadmin -d -e PMA_HOST=yourhosthere -e PMA_PORT=3306 -p 80:80 phpmyadmin
+
 # open mysql using docker directly using docker run
 docker run -it --rm mysql mysql -hcrm.cluster-crml0m77ocb0.eu-south-1.rds.amazonaws.com -uadmin -p
 

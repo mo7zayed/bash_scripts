@@ -1,3 +1,6 @@
+# create ubuntu user
+sudo useradd -s /bin/bash -d /home/ubuntu -m -G sudo ubuntu
+
 # update os
 sudo apt update -y
 sudo apt upgrade -y

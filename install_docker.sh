@@ -4,6 +4,9 @@ sudo useradd -s /bin/bash -d /home/ubuntu -m -G sudo ubuntu
 # make him a superuser without a password
 echo "ubuntu ALL=(ALL) NOPASSWD:AL" > /etc/sudoers.d/ubuntu
 
+# switch to ubuntu user
+su ubuntu
+
 # update os
 sudo apt update -y
 sudo apt upgrade -y
